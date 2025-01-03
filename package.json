@@ -8,9 +8,10 @@
     "dev": "nodemon src/app.js",
     "test": "jest",
     "lint": "eslint .",
-    "ai:init": "node src/tools/sessionInit.js",
-    "ai:status": "node src/tools/projectManager.js --status",
-    "ai:save": "node src/tools/projectManager.js --save"
+    "ai:init": "node src/tools/projectManager.js verifyProjectState",
+    "ai:status": "node src/tools/projectManager.js updateStatus",
+    "ai:save": "node src/tools/projectManager.js generateHandoff",
+    "ai:test": "node src/tools/test-session.js"
   },
   "dependencies": {
     "express": "^4.18.2",
