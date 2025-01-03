@@ -7,12 +7,3 @@
 # * What is the benefit for the user/project
 # 
 # Refs: #123 (issue/PR number)
-#
-# Types:
-#   feat     (new feature)
-#   fix      (bug fix)
-#   docs     (documentation changes)
-#   style    (formatting, missing semi colons, etc)
-#   refactor (refactoring code)
-#   test     (adding tests, refactoring tests)
-#   chore    (updating build tasks, package manager configs)
