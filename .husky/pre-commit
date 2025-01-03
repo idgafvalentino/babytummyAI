@@ -1,0 +1,21 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Run status check
+npm run status
+
+# Run cleanup
+npm run cleanup
+
+# Run tests and linting
+npm run verify
+
+# Check for sensitive files
+if git diff --cached --name-only | grep -E '\.env$|\.pem$|\.key$|secret|password'; then
+  echo "❌ Attempting to commit sensitive files. Please remove them."
+  exit 1
+fi
+
+echo "✅ Pre-commit checks passed"

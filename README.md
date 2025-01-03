@@ -1,92 +1,144 @@
-# Pregnancy Nutrition Tracker
+# Calorie Tracker Application
 
-A private, mobile-friendly web application for tracking pregnancy nutrition.
+A comprehensive calorie and nutrition tracking application designed for pregnancy nutrition monitoring.
 
-## Setup Instructions
+## Quick Start
 
-### 1. Create a GitHub Repository
+```bash
+# Install dependencies
+npm install
 
-1. Create a new private repository on GitHub
-2. Push this code to your repository:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin your-repo-url
-   git push -u origin main
-   ```
+# Set up environment variables
+cp .env.example .env
 
-### 2. Configure Access Code
+# Run database migrations
+npm run migrate
 
-The app is protected by an access code. The default code is "admin" - you should change this:
+# Start development server
+npm run dev
+```
 
-1. Visit [SHA-256 Hash Generator](https://emn178.github.io/online-tools/sha256.html)
-2. Enter your desired access code
-3. Copy the generated hash
-4. Replace the `correctHash` value in `login.html` with your new hash
+## Project Structure
 
-### 3. Set Up API Credentials
+```
+├── src/
+│   ├── config/        # Application configuration
+│   ├── models/        # Database models
+│   ├── controllers/   # Business logic
+│   ├── routes/        # API routes
+│   ├── middleware/    # Express middleware
+│   └── tests/         # Test files
+├── client/
+│   ├── src/
+│   │   ├── js/       # Frontend JavaScript
+│   │   └── styles/   # CSS styles
+│   └── index.html    # Main HTML file
+```
 
-The app uses Imagga API for food image recognition. To set this up:
+## API Documentation
 
-1. Sign up for an [Imagga account](https://imagga.com/)
-2. Get your API key and secret from the dashboard
-3. Create a new file called `config.js` based on `config.template.js`
-4. Add your Imagga credentials to `config.js`
+### Authentication
 
-### 4. Enable GitHub Pages
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
 
-1. Go to your repository settings
-2. Navigate to "Pages" section
-3. Enable GitHub Pages from the main branch
-4. Set the visibility to "Private"
+### Food Entries
 
-### 5. Access the App
+- `POST /api/food-entries` - Create new food entry
+- `GET /api/food-entries` - Get user's food entries
+- `DELETE /api/food-entries/:id` - Delete food entry
 
-1. Once GitHub Pages is enabled, you'll get a URL like: `https://username.github.io/repo-name`
-2. Share this URL with your sister
-3. She can access it through her iPhone's browser using the access code you created
+### Weight Tracking
 
-### 6. Add to iPhone Home Screen
+- `POST /api/weight-logs` - Log new weight
+- `GET /api/weight-logs` - Get weight history
 
-To make it feel more like a native app:
+### User Profile
 
-1. Open the site in Safari
-2. Tap the share button (box with arrow)
-3. Select "Add to Home Screen"
-4. Give it a name and tap "Add"
+- `GET /api/users/me` - Get current user profile
+- `PATCH /api/users/me` - Update user profile
 
-Now there will be an app icon on the home screen that opens the tracker directly!
+For detailed API documentation, see [API Documentation](docs/API_ENDPOINTS.md).
 
-## Security Notes
+## Database Schema
 
-- Keep your repository private
-- Don't commit the actual `config.js` file with API credentials
-- Change the access code from the default
-- Only share the access code with intended users
+### Users
 
-## Development Notes
+- id (UUID)
+- email (String, unique)
+- password (String, hashed)
+- pregnancyStartDate (Date)
+- prePregnancyWeight (Float)
+- height (Float)
+- createdAt (DateTime)
+- updatedAt (DateTime)
 
-To make changes or improvements:
+### FoodEntries
 
-1. Clone the repository
-2. Create `config.js` from the template
-3. Make your changes
-4. Test locally by opening `index.html`
-5. Commit and push to deploy to GitHub Pages
+- id (UUID)
+- userId (UUID, FK)
+- name (String)
+- calories (Integer)
+- protein (Float)
+- carbs (Float)
+- fats (Float)
+- mealType (Enum)
+- date (Date)
 
-## Backup
+### WeightLogs
 
-The app currently stores data in the browser. To prevent data loss:
+- id (UUID)
+- userId (UUID, FK)
+- weight (Float)
+- date (Date)
 
-1. Take regular screenshots of important data
-2. Consider implementing data export feature in future updates
+## Development
 
-## Future Improvements
+### Prerequisites
 
-- Data persistence with a backend database
-- Offline support
-- Data export/backup feature
-- Multiple user support
-- Progress tracking and charts
+- Node.js >= 14
+- PostgreSQL >= 13
+- npm >= 6
+
+### Environment Variables
+
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=calorie
+DB_USER=postgres
+DB_PASSWORD=your_password
+JWT_SECRET=your_jwt_secret
+```
+
+### Testing
+
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+### Code Quality
+
+```bash
+# Run linter
+npm run lint
+
+# Format code
+npm run format
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the ISC License.
