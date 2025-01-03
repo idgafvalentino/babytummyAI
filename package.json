@@ -27,7 +27,10 @@
     "predev": "npm run status",
     "prebuild": "npm run maintain",
     "check": "npm run status && npm run security",
-    "verify": "npm run lint && npm run test && npm run status"
+    "verify": "npm run lint && npm run test && npm run status",
+    "ai:init": "node src/tools/sessionInit.js",
+    "ai:status": "node src/tools/projectManager.js",
+    "ai:save": "npm run ai:status && npm run ai:init > docs/LAST_SESSION.md"
   },
   "jest": {
     "testEnvironment": "node",
