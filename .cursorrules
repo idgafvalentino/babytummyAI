@@ -19,8 +19,8 @@
           "config": {
             "purpose": "Configuration files",
             "required": [
-              "database.js",
-              "auth.js"
+              "app.config.js",
+              "test.config.js"
             ],
             "allowNewFiles": false
           },
@@ -29,8 +29,8 @@
             "required": [
               "index.js",
               "User.js",
-              "FoodEntry.js",
-              "WeightLog.js"
+              "Profile.js",
+              "NutritionLog.js"
             ],
             "allowNewFiles": false
           },
@@ -38,15 +38,17 @@
             "purpose": "API routes",
             "required": [
               "auth.routes.js",
-              "food.routes.js",
-              "weight.routes.js"
+              "profile.routes.js",
+              "nutrition.routes.js"
             ],
             "pattern": "*.routes.js"
           },
           "middleware": {
             "purpose": "Express middleware",
             "required": [
-              "auth.js"
+              "auth.js",
+              "validate.js",
+              "error.js"
             ],
             "pattern": "*.js"
           },
@@ -54,8 +56,8 @@
             "purpose": "Business logic",
             "required": [
               "auth.controller.js",
-              "food.controller.js",
-              "weight.controller.js"
+              "profile.controller.js",
+              "nutrition.controller.js"
             ],
             "pattern": "*.controller.js"
           },
@@ -121,7 +123,10 @@
             "order": 2,
             "name": "Database Models",
             "files": [
-              "src/models/*"
+              "src/models/index.js",
+              "src/models/User.js",
+              "src/models/Profile.js",
+              "src/models/NutritionLog.js"
             ]
           },
           {
@@ -129,6 +134,8 @@
             "name": "Authentication",
             "files": [
               "src/middleware/auth.js",
+              "src/middleware/validate.js",
+              "src/middleware/error.js",
               "src/routes/auth.routes.js"
             ]
           },
@@ -136,15 +143,21 @@
             "order": 4,
             "name": "Core Features",
             "files": [
-              "src/routes/*",
-              "src/controllers/*"
+              "src/routes/profile.routes.js",
+              "src/routes/nutrition.routes.js",
+              "src/controllers/auth.controller.js",
+              "src/controllers/profile.controller.js",
+              "src/controllers/nutrition.controller.js"
             ]
           },
           {
             "order": 5,
             "name": "Frontend Integration",
             "files": [
-              "client/src/js/*"
+              "client/src/js/script.js",
+              "client/src/js/nutrition.js",
+              "client/src/js/healthMonitor.js",
+              "client/src/js/culturalAdaptations.js"
             ]
           }
         ]

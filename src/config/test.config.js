@@ -4,9 +4,9 @@ module.exports = {
   db: {
     host: 'localhost',
     port: 5432,
-    database: 'calorie_test',
+    database: 'pregnancy_nutrition_test',
     username: 'postgres',
-    password: 'postgres',
+    password: process.env.DB_PASSWORD,
     dialect: 'postgresql',
     logging: false,
     pool: {
@@ -24,9 +24,9 @@ module.exports = {
   },
   app: {
     env: 'test',
-    port: 3001,
+    port: 5001,
     apiVersion: 'v1',
-    corsOrigins: ['http://localhost:3001'],
+    corsOrigins: ['http://localhost:5001'],
     uploadDir: path.join(__dirname, '../test-uploads'),
     logDir: path.join(__dirname, '../test-logs'),
     rateLimiting: {

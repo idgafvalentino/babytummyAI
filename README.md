@@ -2,6 +2,16 @@
 
 A comprehensive calorie and nutrition tracking application designed for pregnancy nutrition monitoring.
 
+## Project Status
+
+Currently in development - Step 4: Core Features
+
+- ✅ Basic Setup: Complete
+- ✅ Database Models: Complete
+- ✅ Authentication: Complete
+- 🔄 Core Features: In Progress
+- ⏳ Frontend Integration: Pending
+
 ## Quick Start
 
 ```bash
@@ -23,17 +33,59 @@ npm run dev
 ```
 ├── src/
 │   ├── config/        # Application configuration
+│   │   ├── app.config.js
+│   │   └── test.config.js
 │   ├── models/        # Database models
+│   │   ├── index.js
+│   │   ├── User.js
+│   │   ├── Profile.js
+│   │   └── NutritionLog.js
 │   ├── controllers/   # Business logic
 │   ├── routes/        # API routes
 │   ├── middleware/    # Express middleware
+│   │   ├── auth.js
+│   │   ├── validate.js
+│   │   └── error.js
 │   └── tests/         # Test files
-├── client/
-│   ├── src/
-│   │   ├── js/       # Frontend JavaScript
-│   │   └── styles/   # CSS styles
-│   └── index.html    # Main HTML file
+├── client/           # Frontend code
+└── docs/            # Documentation
 ```
+
+## Database Schema
+
+### Users
+
+- id (Integer, PK)
+- email (String, unique)
+- password (String, hashed)
+- created_at (Timestamp)
+- updated_at (Timestamp)
+
+### Profiles
+
+- id (Integer, PK)
+- user_id (Integer, FK)
+- pregnancy_week (Integer)
+- pre_pregnancy_weight (Decimal)
+- current_weight (Decimal)
+- height (Decimal)
+- activity_level (String)
+- dietary_restrictions (String[])
+- medical_conditions (String[])
+- trimester (Integer)
+- created_at (Timestamp)
+- updated_at (Timestamp)
+
+### Nutrition Logs
+
+- id (Integer, PK)
+- user_id (Integer, FK)
+- meal_type (String)
+- calories (Integer)
+- food_name (String)
+- date (Date)
+- time (Time)
+- created_at (Timestamp)
 
 ## API Documentation
 
@@ -42,55 +94,16 @@ npm run dev
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - Login user
 
-### Food Entries
+### Profile Management
 
-- `POST /api/food-entries` - Create new food entry
-- `GET /api/food-entries` - Get user's food entries
-- `DELETE /api/food-entries/:id` - Delete food entry
+- `GET /api/profile` - Get user profile
+- `PUT /api/profile` - Update user profile
 
-### Weight Tracking
+### Nutrition Tracking
 
-- `POST /api/weight-logs` - Log new weight
-- `GET /api/weight-logs` - Get weight history
-
-### User Profile
-
-- `GET /api/users/me` - Get current user profile
-- `PATCH /api/users/me` - Update user profile
-
-For detailed API documentation, see [API Documentation](docs/API_ENDPOINTS.md).
-
-## Database Schema
-
-### Users
-
-- id (UUID)
-- email (String, unique)
-- password (String, hashed)
-- pregnancyStartDate (Date)
-- prePregnancyWeight (Float)
-- height (Float)
-- createdAt (DateTime)
-- updatedAt (DateTime)
-
-### FoodEntries
-
-- id (UUID)
-- userId (UUID, FK)
-- name (String)
-- calories (Integer)
-- protein (Float)
-- carbs (Float)
-- fats (Float)
-- mealType (Enum)
-- date (Date)
-
-### WeightLogs
-
-- id (UUID)
-- userId (UUID, FK)
-- weight (Float)
-- date (Date)
+- `POST /api/nutrition` - Log food entry
+- `GET /api/nutrition` - Get nutrition logs
+- `GET /api/nutrition/summary` - Get nutrition summary
 
 ## Development
 
@@ -105,7 +118,7 @@ For detailed API documentation, see [API Documentation](docs/API_ENDPOINTS.md).
 ```
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=calorie
+DB_NAME=pregnancy_nutrition
 DB_USER=postgres
 DB_PASSWORD=your_password
 JWT_SECRET=your_jwt_secret

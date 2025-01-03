@@ -1,40 +1,49 @@
 const path = require('path');
+require('dotenv').config();
+
+// Database Configuration
+const dbConfig = {
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 5432,
+  database: process.env.DB_NAME || 'pregnancy_nutrition',
+  username: process.env.DB_USER || 'postgres',
+  password: process.env.DB_PASSWORD,
+  dialect: 'postgresql',
+  logging: process.env.NODE_ENV === 'development',
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
+};
+
+// Authentication Configuration
+const authConfig = {
+  jwtSecret: process.env.JWT_SECRET,
+  jwtExpiration: process.env.JWT_EXPIRATION || '24h',
+  saltRounds: 10,
+  tokenType: 'Bearer',
+};
+
+// Application Configuration
+const appConfig = {
+  env: process.env.NODE_ENV || 'development',
+  port: process.env.PORT || 5000,
+  apiVersion: 'v1',
+  corsOrigins: process.env.CORS_ORIGINS
+    ? process.env.CORS_ORIGINS.split(',')
+    : ['http://localhost:5000'],
+  uploadDir: path.join(__dirname, '../uploads'),
+  logDir: path.join(__dirname, '../logs'),
+  rateLimiting: {
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+  },
+};
 
 module.exports = {
-  // Application settings
-  app: {
-    port: 3000,
-    env: 'development',
-    apiPrefix: '/api/v1',
-  },
-
-  // Database configuration
-  database: {
-    host: 'localhost',
-    port: 5432,
-    name: 'calorie_db',
-    user: 'postgres',
-    password: 'your_password',
-  },
-
-  // File paths
-  paths: {
-    root: path.resolve(__dirname, '../..'),
-    client: path.resolve(__dirname, '../../client'),
-    uploads: path.resolve(__dirname, '../../uploads'),
-    logs: path.resolve(__dirname, '../../logs'),
-  },
-
-  // Logging configuration
-  logging: {
-    level: 'info',
-    file: path.resolve(__dirname, '../../logs/app.log'),
-  },
-
-  // CORS configuration
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  },
+  db: dbConfig,
+  auth: authConfig,
+  app: appConfig,
 };

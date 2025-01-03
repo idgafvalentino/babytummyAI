@@ -21,17 +21,46 @@
 ## [Auto-generated entries will appear below]
 
 
-## 2025-01-03 - Step 5: Frontend Integration
+## 2025-01-03 - Step 4: Core Features
 
 ### Status
-- ✅ client/src/js/*
+- ⏳ src/routes/profile.routes.js
+- ⏳ src/routes/nutrition.routes.js
+- ✅ src/controllers/auth.controller.js
+- ⏳ src/controllers/profile.controller.js
+- ⏳ src/controllers/nutrition.controller.js
 
 ### Next Actions
-All required files are present.
+1. Create/Complete src/routes/profile.routes.js
+1. Create/Complete src/routes/nutrition.routes.js
+1. Create/Complete src/controllers/profile.controller.js
+1. Create/Complete src/controllers/nutrition.controller.js
 
 ### AI Collaboration
 - Reference: docs/AI_COLLABORATION.md
-- Current Step: "Frontend Integration"
-- Files: client/src/js/*
+- Current Step: "Core Features"
+- Files: src/routes/profile.routes.js, src/routes/nutrition.routes.js, src/controllers/auth.controller.js, src/controllers/profile.controller.js, src/controllers/nutrition.controller.js
+
+---
+
+## 2025-01-03 - Step 4: Core Features
+
+### Status
+- ⏳ src/routes/profile.routes.js
+- ⏳ src/routes/nutrition.routes.js
+- ✅ src/controllers/auth.controller.js
+- ⏳ src/controllers/profile.controller.js
+- ⏳ src/controllers/nutrition.controller.js
+
+### Next Actions
+1. Create/Complete src/routes/profile.routes.js
+1. Create/Complete src/routes/nutrition.routes.js
+1. Create/Complete src/controllers/profile.controller.js
+1. Create/Complete src/controllers/nutrition.controller.js
+
+### AI Collaboration
+- Reference: docs/AI_COLLABORATION.md
+- Current Step: "Core Features"
+- Files: src/routes/profile.routes.js, src/routes/nutrition.routes.js, src/controllers/auth.controller.js, src/controllers/profile.controller.js, src/controllers/nutrition.controller.js
 
 ---
