@@ -162,6 +162,86 @@
           }
         ]
       }
+    },
+    "aiSessionManagement": {
+      "sessionStart": {
+        "required": true,
+        "actions": [
+          {
+            "tool": "projectManager.js",
+            "purpose": "Verify project state and current step"
+          },
+          {
+            "tool": "db-check.js",
+            "purpose": "Verify database structure"
+          }
+        ],
+        "contextFiles": [
+          {
+            "path": "docs/AI_COLLABORATION.md",
+            "purpose": "Current project context and status"
+          },
+          {
+            "path": "docs/devlog.md",
+            "purpose": "Development history and recent updates"
+          },
+          {
+            "path": "docs/LAST_SESSION.md",
+            "purpose": "Previous session handoff notes"
+          }
+        ]
+      },
+      "duringSession": {
+        "required": true,
+        "trackingFiles": [
+          {
+            "path": "docs/devlog.md",
+            "updateTrigger": "significant progress"
+          },
+          {
+            "path": "docs/AI_COLLABORATION.md",
+            "updateTrigger": "status change"
+          }
+        ]
+      },
+      "sessionEnd": {
+        "required": true,
+        "actions": [
+          {
+            "tool": "projectManager.js",
+            "purpose": "Update project status"
+          },
+          {
+            "tool": "sessionInit.js",
+            "purpose": "Generate handoff notes",
+            "output": "docs/LAST_SESSION.md"
+          }
+        ],
+        "commitRequirements": [
+          "Update AI context files",
+          "Generate handoff notes",
+          "Verify project state"
+        ]
+      }
+    },
+    "contextMaintenance": {
+      "automaticUpdates": {
+        "preCommit": {
+          "required": true,
+          "script": "npm run ai:save"
+        },
+        "onBranchChange": {
+          "required": true,
+          "script": "npm run ai:status"
+        }
+      },
+      "manualUpdates": {
+        "commands": {
+          "ai:init": "Initialize new AI session",
+          "ai:status": "Check project status",
+          "ai:save": "Save session state"
+        }
+      }
     }
   }
 }
