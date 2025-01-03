@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Calorie Tracker</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Food Log</a></li>
+                <li><a href="#">Nutrition Info</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="dashboard">
+            <h1>Welcome, [User's Name]!</h1>
+            <div class="daily-summary">
+                <h2>Daily Summary</h2>
+                <p>Total Calories: <span id="total-calories">0</span></p>
+                <p>Goal: <span id="calorie-goal">2000</span></p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 0%;"></div>
+                </div>
+            </div>
+            <div class="recent-food-entries">
+                <h2>Recent Food Entries</h2>
+                <ul id="recent-entries">
+                    <!-- Recent entries will be dynamically populated here -->
+                </ul>
+            </div>
+            <div class="goal-tracker">
+                <h2>Goal Tracker</h2>
+                <p>Calories Goal: <span id="calories-goal">2000</span></p>
+                <p>Progress: <span id="calories-progress">0</span></p>
+            </div>
+            <button id="quick-add-food">Quick Add Food</button>
+        </section>
+        <section class="resources">
+            <h2>Educational Resources</h2>
+            <ul>
+                <li><a href="#">Nutrition Tips</a></li>
+                <li><a href="#">Healthy Recipes</a></li>
+                <li><a href="#">Pregnancy Nutrition Articles</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Calorie Tracker. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

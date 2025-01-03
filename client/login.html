@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Pregnancy Nutrition Tracker</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .login-container {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 400px;
+      }
+
+      h1 {
+        color: #4a90e2;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+
+      button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+
+      button:hover {
+        background-color: #357abd;
+      }
+
+      .error {
+        color: #dc3545;
+        margin-top: 1rem;
+        text-align: center;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Pregnancy Nutrition Tracker</h1>
+      <form id="loginForm" onsubmit="return handleLogin(event)">
+        <div class="form-group">
+          <label for="password">Access Code</label>
+          <input type="password" id="password" required />
+        </div>
+        <button type="submit">Login</button>
+        <p id="error" class="error">Incorrect access code. Please try again.</p>
+      </form>
+    </div>
+
+    <script>
+      // Simple hash function
+      async function hashPassword(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hash))
+          .map((b) => b.toString(16).padStart(2, "0"))
+          .join("");
+      }
+
+      async function handleLogin(event) {
+        event.preventDefault();
+        const password = document.getElementById("password").value;
+        const hashedPassword = await hashPassword(password);
+
+        // Replace this with your sister's chosen access code (hashed)
+        const correctHash =
+          "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
+
+        if (hashedPassword === correctHash) {
+          sessionStorage.setItem("authenticated", "true");
+          window.location.href = "index.html";
+        } else {
+          document.getElementById("error").style.display = "block";
+        }
+        return false;
+      }
+
+      // Redirect to login if not authenticated
+      if (
+        window.location.pathname.endsWith("index.html") &&
+        !sessionStorage.getItem("authenticated")
+      ) {
+        window.location.href = "login.html";
+      }
+    </script>
+  </body>
+</html>

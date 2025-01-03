@@ -1,0 +1,17 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "terminal.integrated.allowChords": true,
+  "terminal.integrated.commandsToSkipShell": [
+    "-workbench.action.terminal.copySelection",
+    "-workbench.action.terminal.paste"
+  ]
+}

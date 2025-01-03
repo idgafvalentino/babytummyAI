@@ -1,0 +1,154 @@
+{
+  "rules": {
+    "project": {
+      "name": "calorie",
+      "type": "full-stack",
+      "structure": {
+        "enforced": true,
+        "allowNewDirectories": false
+      }
+    },
+    "directories": {
+      "src": {
+        "description": "Backend source code",
+        "allowedFiles": [
+          "*.js",
+          "*.ts"
+        ],
+        "subdirectories": {
+          "config": {
+            "purpose": "Configuration files",
+            "required": [
+              "database.js",
+              "auth.js"
+            ],
+            "allowNewFiles": false
+          },
+          "models": {
+            "purpose": "Database models",
+            "required": [
+              "index.js",
+              "User.js",
+              "FoodEntry.js",
+              "WeightLog.js"
+            ],
+            "allowNewFiles": false
+          },
+          "routes": {
+            "purpose": "API routes",
+            "required": [
+              "auth.routes.js",
+              "food.routes.js",
+              "weight.routes.js"
+            ],
+            "pattern": "*.routes.js"
+          },
+          "middleware": {
+            "purpose": "Express middleware",
+            "required": [
+              "auth.js"
+            ],
+            "pattern": "*.js"
+          },
+          "controllers": {
+            "purpose": "Business logic",
+            "required": [
+              "auth.controller.js",
+              "food.controller.js",
+              "weight.controller.js"
+            ],
+            "pattern": "*.controller.js"
+          },
+          "tests": {
+            "purpose": "Test files",
+            "pattern": "*.test.js"
+          }
+        }
+      },
+      "client": {
+        "description": "Frontend source code",
+        "subdirectories": {
+          "src": {
+            "js": {
+              "required": [
+                "script.js",
+                "nutrition.js",
+                "healthMonitor.js",
+                "culturalAdaptations.js"
+              ]
+            },
+            "styles": {
+              "required": [
+                "styles.css"
+              ]
+            }
+          }
+        },
+        "required": [
+          "index.html",
+          "login.html"
+        ]
+      }
+    },
+    "naming": {
+      "components": "PascalCase",
+      "routes": "camelCase",
+      "models": "PascalCase",
+      "controllers": "PascalCase"
+    },
+    "database": {
+      "type": "postgresql",
+      "models": {
+        "required": [
+          "timestamps",
+          "validation"
+        ]
+      }
+    },
+    "development": {
+      "incrementalApproach": {
+        "steps": [
+          {
+            "order": 1,
+            "name": "Basic Setup",
+            "files": [
+              "src/app.js",
+              ".env",
+              "package.json"
+            ]
+          },
+          {
+            "order": 2,
+            "name": "Database Models",
+            "files": [
+              "src/models/*"
+            ]
+          },
+          {
+            "order": 3,
+            "name": "Authentication",
+            "files": [
+              "src/middleware/auth.js",
+              "src/routes/auth.routes.js"
+            ]
+          },
+          {
+            "order": 4,
+            "name": "Core Features",
+            "files": [
+              "src/routes/*",
+              "src/controllers/*"
+            ]
+          },
+          {
+            "order": 5,
+            "name": "Frontend Integration",
+            "files": [
+              "client/src/js/*"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
