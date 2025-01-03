@@ -1,92 +1,41 @@
 {
   "name": "calorie",
   "version": "1.0.0",
-  "description": "A private, mobile-friendly web application for tracking pregnancy nutrition.",
+  "description": "A nutrition tracking application for pregnant women",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "lint": "eslint . --ext .js --fix",
-    "prepare": "husky install",
-    "test": "jest --runInBand --detectOpenHandles",
-    "test:watch": "jest --watch --runInBand",
-    "test:coverage": "jest --coverage --runInBand",
-    "test:ci": "jest --ci --runInBand --coverage",
-    "migrate": "sequelize-cli db:migrate",
-    "seed": "sequelize-cli db:seed:all",
-    "docs": "jsdoc -c jsdoc.json",
-    "security": "npm audit",
-    "validate": "npm run lint && npm run test",
-    "status": "node src/tools/projectManager.js",
-    "cleanup": "npm run cleanup:logs && npm run cleanup:temp",
-    "cleanup:logs": "./scripts/cleanup-logs.sh",
-    "cleanup:temp": "rimraf ./tmp/* ./temp/*",
-    "cleanup:git": "./scripts/clean-git-history.sh",
-    "maintain": "npm run validate && npm run cleanup && npm run security",
-    "predev": "npm run status",
-    "prebuild": "npm run maintain",
-    "check": "npm run status && npm run security",
-    "verify": "npm run lint && npm run test && npm run status",
+    "test": "jest",
+    "lint": "eslint .",
     "ai:init": "node src/tools/sessionInit.js",
-    "ai:status": "node src/tools/projectManager.js",
-    "ai:save": "npm run ai:status && npm run ai:init > docs/LAST_SESSION.md"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/tests/setup.js"
-    ],
-    "testMatch": [
-      "**/tests/**/*.test.js"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/tests/**/*.js",
-      "!src/config/**/*.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 80,
-        "functions": 80,
-        "lines": 80,
-        "statements": 80
-      }
-    }
-  },
-  "keywords": [
-    "pregnancy",
-    "nutrition",
-    "calorie-tracker",
-    "food-recognition"
-  ],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/jest": "^29.5.11",
-    "eslint": "^8.0.0",
-    "eslint-config-prettier": "^8.0.0",
-    "eslint-plugin-jest": "^27.6.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^29.7.0",
-    "nodemon": "^2.0.15",
-    "prettier": "^2.0.0",
-    "rimraf": "^5.0.10",
-    "supertest": "^6.3.4"
+    "ai:status": "node src/tools/projectManager.js --status",
+    "ai:save": "node src/tools/projectManager.js --save"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "chalk": "^4.1.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.17.1",
-    "express-validator": "^6.12.1",
-    "helmet": "^7.1.0",
-    "jsonwebtoken": "^9.0.2",
+    "express": "^4.18.2",
     "pg": "^8.11.3",
-    "pg-hstore": "^2.3.4",
-    "sequelize": "^6.37.1",
-    "winston": "^3.17.0",
-    "winston-daily-rotate-file": "^5.0.0"
+    "sequelize": "^6.35.2",
+    "dotenv": "^16.3.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "express-validator": "^7.0.1",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "nodemon": "^3.0.2",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.1.1",
+    "husky": "^8.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run ai:save",
+      "post-checkout": "npm run ai:status"
+    }
   }
 }

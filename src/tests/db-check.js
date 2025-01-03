@@ -104,9 +104,17 @@ async function checkDatabaseStructure() {
     }
   } catch (error) {
     console.error('❌ Error:', error.message);
+    throw error;
   } finally {
     await sequelize.close();
   }
 }
 
-checkDatabaseStructure();
+// Run check if called directly
+if (require.main === module) {
+  checkDatabaseStructure();
+}
+
+module.exports = {
+  checkDatabaseStructure,
+};
