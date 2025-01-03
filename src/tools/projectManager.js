@@ -78,10 +78,10 @@ ${this.generateStatusReport(currentStep)}
 ### Next Actions
 ${this.generateNextActions(currentStep)}
 
-### Notes for AI Assistance
-- When asking for help, mention you're working on: "${currentStep.name}"
-- Reference specific files from: ${currentStep.files.join(', ')}
-- Ask for validation against .cursorrules structure
+### AI Collaboration
+- Reference: docs/AI_COLLABORATION.md
+- Current Step: "${currentStep.name}"
+- Files: ${currentStep.files.join(', ')}
 
 ---
 `;

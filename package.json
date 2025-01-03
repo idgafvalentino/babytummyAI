@@ -8,7 +8,13 @@
     "dev": "nodemon src/app.js",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "lint": "eslint . --ext .js --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest --coverage",
+    "migrate": "sequelize-cli db:migrate",
+    "seed": "sequelize-cli db:seed:all",
+    "docs": "jsdoc -c jsdoc.json",
+    "security": "npm audit",
+    "validate": "npm run lint && npm run test"
   },
   "keywords": [
     "pregnancy",
